@@ -28,13 +28,14 @@ public class HelloWorldServlet extends HttpServlet {
 
     //Step 4: Create a page that displays "Hello World!" when a user visits /hello
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
 
 
         res.setContentType("text/html");
         //add the page view counter after setting the response type and in the out.println
         pageViewCount++;
+
 
         //Add "throws ServletException and IOException" to doGet() to remove .getWriter() error
         PrintWriter out = res.getWriter();

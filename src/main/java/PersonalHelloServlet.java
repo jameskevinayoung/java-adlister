@@ -34,7 +34,7 @@ public class PersonalHelloServlet extends HttpServlet {
 
         res.setContentType("text/html");
         //add the page view counter after setting the response type and in the out.println
-        pageViewCount++;//increment the counter
+//        pageViewCount++;//increment the counter
 
 
         //Add "throws ServletException and IOException" to doGet() to remove .getWriter() error
@@ -66,11 +66,12 @@ public class PersonalHelloServlet extends HttpServlet {
         //add the page view counter after setting the response type and in the out.println
         pageViewCount++;
         String name = req.getParameter("name");
-
+        String output = "World";
+        if(name != null){
+            output = name;
+        }
         //Add "throws IOException" to doGet() to remove .getWriter() error
-        PrintWriter out = res.getWriter();
-
-        out.println("<h1>Hello, "+ name +"!</h1>\n" + "<h2> Page views: "+pageViewCount+"</h2>\n");
+        res.getWriter().println("<h1>Hello, "+ output +"!</h1>\n" + "<h2> Page views: "+pageViewCount+"</h2>\n");
 
 
     }
