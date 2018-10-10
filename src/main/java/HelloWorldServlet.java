@@ -1,4 +1,5 @@
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import java.io.IOException;
  * Step 3: Configure IntelliJ for the project
  */
 
+@WebServlet(name = "HelloWorldServlet", urlPatterns = "/hello")
 
 public class HelloWorldServlet extends HttpServlet {
     //step 5: create a counter to count page views
