@@ -18,8 +18,9 @@ import java.io.IOException;
 @WebServlet(name = "PersonalHelloServlet", urlPatterns = "/form")
 public class PersonalHelloServlet extends HttpServlet {
     //step 5: create a counter to count page views
-    private int pageViewCount;
+    private int pageViewCount; //create a counter property that is private
 
+    //create an initializer that will reset counter
     public void init() {
         // Reset counter.
         pageViewCount = 0;
@@ -33,7 +34,7 @@ public class PersonalHelloServlet extends HttpServlet {
 
         res.setContentType("text/html");
         //add the page view counter after setting the response type and in the out.println
-        pageViewCount++;
+        pageViewCount++;//increment the counter
 
 
         //Add "throws ServletException and IOException" to doGet() to remove .getWriter() error
@@ -57,7 +58,7 @@ public class PersonalHelloServlet extends HttpServlet {
                 "saying hello";
     }
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
 
 
@@ -66,10 +67,11 @@ public class PersonalHelloServlet extends HttpServlet {
         pageViewCount++;
         String name = req.getParameter("name");
 
-        //Add "throws ServletException and IOException" to doGet() to remove .getWriter() error
+        //Add "throws IOException" to doGet() to remove .getWriter() error
         PrintWriter out = res.getWriter();
 
         out.println("<h1>Hello, "+ name +"!</h1>\n" + "<h2> Page views: "+pageViewCount+"</h2>\n");
+
 
     }
 
