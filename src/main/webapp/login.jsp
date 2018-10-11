@@ -17,6 +17,7 @@
 
 <html>
 <%--don't know why this is doing doesn't mirror the navbar. Maybe its because its located in the head vs body--%>
+<%--the header, navbar, and footer are all included from the partials folder with the use of the jsp XML syntax --%>
 <head>
 
     <jsp:include page="partials/head.jsp">
