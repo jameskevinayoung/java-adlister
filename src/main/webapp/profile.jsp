@@ -1,18 +1,21 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Codeup
-  Date: 10/11/18
-  Time: 10:56 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
-    <title>Title</title>
+    <jsp:include page="partials/head.jsp">
+        <jsp:param name="title" value="Welcome to your Profile!"/>
+    </jsp:include>
 </head>
 <body>
 
+<jsp:include page="partials/navbar.jsp"/>
+
+<main class="profile-container">
+    <p>Something supposed to be here but I don't know what yet. Be patient, I'll figure it out!</p>
+</main>
+
+<footer>
+    <jsp:include page="partials/footer.jsp"/>
+</footer>
 </body>
 </html>
