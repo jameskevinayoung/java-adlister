@@ -1,6 +1,4 @@
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <nav>
     <%--just a simple navbar no css or bootstrap--%>
 

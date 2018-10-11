@@ -1,5 +1,5 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
 //    Put this above the document to make sure the information is processed first
@@ -45,8 +45,6 @@
                 <label for="password">Password:</label>
                 <input class="form-input" id="password" type="password" name="password"/><br/><br/>
 
-                <%--create the input for the button; it's important to make it an input instead of a button because
-                    <input type="submit" automatically submits a form on click --%>
                 <input type="submit" value="Login"/>
             </form>
         </section>
