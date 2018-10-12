@@ -9,9 +9,16 @@
 <body>
 <jsp:include page="/partials/navbar.jsp"/>
 
-<div class="container">
-    <h1>Ads</h1>
+    <div class="container">
+        <h1>Ads</h1>
+<%--forEach loop in this container; loop each ad from ads and display each ad title and description--%>
+        <c:forEach var = "ad" items="${ads}">
+            <section>
+                <h3>${ad.title}</h3>
+                <p>${ad.description}</p>
+            </section>
+        </c:forEach>
 
-</div>
+    </div>
 </body>
 </html>
