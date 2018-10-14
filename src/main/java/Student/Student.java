@@ -18,7 +18,8 @@ public class Student {
 
     //a constructor with all properties allows you to read an object that is already registered
 
-    public Student(String firstName, String lastName, Date dateOfBirth, char gender) {
+    public Student(long studentID, String firstName, String lastName, Date dateOfBirth, char gender) {
+        this.studentID = studentID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;

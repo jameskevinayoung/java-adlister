@@ -1,6 +1,7 @@
 package Student;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 //The Data Access Object handles interactions with the database.
@@ -17,6 +18,11 @@ public class ListStudentsDao implements Students {
     //created a List constructor for a list of student objects that produces an array list
     public ListStudentsDao() {
         students = new ArrayList<>();
+        students.add(new Student(1,"James", "Young", new Date("02/22/1984"),'M'));
+        students.add(new Student(2,"Rachael", "Simmons", new Date("08/28/1987"),'F'));
+        students.add(new Student(2,"Mitchel", "Ahmad-Pital", new Date("05/17/1980"),'M'));
+        students.add(new Student(2,"Fer", "Martinez", new Date("03/21/1991"),'M'));
+        students.add(new Student(2,"Fatima", "Perrelli", new Date("01/17/1988"),'F'));
     }
 
     //this is a method that takes the list of student objects and returns all of the students
