@@ -16,6 +16,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         boolean validAttempt = username.equals("admin") && password.equals("password");
 
+        request.getSession().setAttribute("username", username);
 
         if (validAttempt) {
             //if the username and password matches the acceptable username/password of the admin;

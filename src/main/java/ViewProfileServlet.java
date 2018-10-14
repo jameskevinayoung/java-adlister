@@ -12,6 +12,8 @@ public class ViewProfileServlet extends HttpServlet {
         if (request.getSession().getAttribute("user") != null ) {
             boolean keyValue = (boolean) request.getSession().getAttribute("user");
             if (keyValue) {
+                String username = (String) request.getSession().getAttribute("username");
+                request.setAttribute("username", username);
                 request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
             }
         } else {
