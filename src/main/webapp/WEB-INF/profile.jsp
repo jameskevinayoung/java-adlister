@@ -12,7 +12,6 @@
     <div class="container">
         <h1>Welcome ${username}.</h1>
 
-        <button><a href="/login">Logout</a></button>
     </div>
 
 </body>
