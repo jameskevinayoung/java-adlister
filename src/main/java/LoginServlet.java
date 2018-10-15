@@ -8,6 +8,13 @@ import java.io.IOException;
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //this takes the user, if logged in, and redirects the user to the profile page;
+        //this forces the user to go down a specific path you want
+
+        if(request.getSession().getAttribute("user") != null ){
+            response.sendRedirect("/profile");
+            return;
+        }
         request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
 
@@ -20,7 +27,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         //to see if the user is the appropriate one for the profile, set up a test for a valid login attempt;
-        //create a boolean variable to is assigned to a username and password;
+        //create a boolean variable to assign it to a username and password; determine if it is valid or not
 
         boolean validAttempt = username.equals("james") && password.equals("12qwas");
 
