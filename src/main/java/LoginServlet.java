@@ -22,9 +22,10 @@ public class LoginServlet extends HttpServlet {
         //to see if the user is the appropriate one for the profile, set up a test for a valid login attempt;
         //create a boolean variable to is assigned to a username and password;
 
-        boolean validAttempt = username.equals("admin") && password.equals("password");
+        boolean validAttempt = username.equals("james") && password.equals("12qwas");
 
-        //in order to use the user's name later we have to get the session cookies and set the username to the username object
+        //in order to use the user's name later we have to get the session cookies and set the attribute of the
+        //username to the username object
 
         request.getSession().setAttribute("username", username);
 
