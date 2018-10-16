@@ -113,8 +113,20 @@ public class MySQLAdsDao implements Ads{
         }
     }
 
-//
+    // create an insert method that takes the ad object and returns a long integer;
+    // because this is a different
     public Long insert(Ad ad){
+        //create a string object for the query statement and format the string object with the title and description
+        //use the mysql insert statement in parenthesis with the values as  wildcard variables
+        //use the getTitle and getDescription methods on the ad to properly insert the data in the database
+        String insertQuery = String.format("INSERT INTO ads(title,description) values ('%s', '%s')", ad.getTitle(), ad.getDescription());
+
+        //use try/catch block with the
+        try{
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
 
         return null;
     }
