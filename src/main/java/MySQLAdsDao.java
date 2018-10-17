@@ -1,3 +1,5 @@
+import com.mysql.cj.jdbc.Driver;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,7 @@ public class MySQLAdsDao implements Ads{
     methods that create a connection. If you placed parameters in the MySQLAdsDao you would have to create another
     object later in the Dao Factory instead of doing it this way
     */
-    Config config = new Config();
+//    Config config = new Config();
 
 
     /*
@@ -31,7 +33,7 @@ public class MySQLAdsDao implements Ads{
     this requires the ability to use the driver manager to retrieve the connection, and handle any exception errors
     */
 
-    public MySQLAdsDao() {
+    public MySQLAdsDao(Config config) {
 
     /*
     This DriverManager.getConnection() has an unhandled exception to take into account
@@ -39,6 +41,7 @@ public class MySQLAdsDao implements Ads{
     */
 
         try {
+            DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
                     config.getUrl(),
                     config.getUsername(),
@@ -121,10 +124,11 @@ public class MySQLAdsDao implements Ads{
          this translates the information from the database to a java object
          */
 
-            return new Ad (results.getLong("id"),
+            return new Ad (
                     results.getLong("user_id"),
                     results.getString("title"),
-                    results.getString("description"));
+                    results.getString("description")
+            );
 
         }catch(SQLException e){
 
@@ -137,7 +141,7 @@ public class MySQLAdsDao implements Ads{
     // create an insert method that takes the ad object and returns a long integer;
     // because this is a different
 
-    @Override
+    @Override //this goes to the CreateAdServlet
     public Long insert(Ad ad){
 
 
@@ -148,7 +152,8 @@ public class MySQLAdsDao implements Ads{
         */
 
 
-        String insertQuery = String.format("INSERT INTO ads(title,description) values ('%s', '%s')", ad.getTitle(), ad.getDescription());
+        String insertQuery = String.format("INSERT INTO ads(user_id, title,description) values ('%s', '%s','%s')",
+                ad.getUserId(), ad.getTitle(), ad.getDescription());
 
 
         //use try/catch block with the statement variable holding the connection to the database to retrieve the information
@@ -164,23 +169,34 @@ public class MySQLAdsDao implements Ads{
         //assign the updated insert statement to the result set and use the getGeneratedKeys method to return a result
         //that holds these keys
 
-        ResultSet result =  statement.getGeneratedKeys();
+            ResultSet result =  statement.getGeneratedKeys();
 
-        //create a conditional statement that uses the next method to move to the next result and returns the result id
-        //which is the first column, aka the id column
-
-        if(result.next()){
+        //get the next result
+            result.next();
 
             //use the getLong(columnLabel) retrieves the column title of the result that we want, which is the id
 
             return result.getLong("id");
-        }
 
         }catch(SQLException e){
             e.printStackTrace();
         }
         return null;
     }
+
+
+    //find one record
+
+//    public Ad findOne(long id){
+//        Ad ad = null;
+//        try{
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery("SELECT * FROM ads where id= " + id);
+//            resultSet.next()
+//        }catch(SQLException e){
+//            e.printStackTrace();
+//        }
+//    }
 
 
 }

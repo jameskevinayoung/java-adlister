@@ -6,7 +6,7 @@ public class DaoFactory {
      */
 
     private static Ads adsDao;
-
+    private static Config config = new Config();
 
     /*
     create a static method that returns the adsDao; if the adsDao does not exist create one from the constructor
@@ -14,7 +14,7 @@ public class DaoFactory {
 
     public static Ads getAdsDao() {
         if (adsDao == null) {
-            adsDao = new MySQLAdsDao();
+            adsDao = new MySQLAdsDao(config);
         }
         return adsDao;
     }
