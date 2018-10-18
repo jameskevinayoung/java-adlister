@@ -2,7 +2,6 @@ package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,9 +76,9 @@ public class MySQLAdsDao implements Ads {
         /** In the try/catch block
             1) use the preparedStatement method on the connection and assign it to the PreparedStatement object variable
                that takes in the insertQuery that takes the ad and the Statement.RETURN_GENERATED_KEYS
-            2) get the generated keys method on the statement variable and assign it to the Result set variable
-            3) set the parameter indices in the insertQuery string, get the title and the description from the ad
-            4) execute the update for the statement
+            2) set the parameter indices in the insertQuery string, get the title and the description from the ad
+            3) execute the update for the statement
+            4) get the generated keys method on the statement variable and assign it to the Result set variable
             5) get the next result, which is the result that was inserted
             6) return the result's id from its column index (1) or column label (id)
          **/
@@ -88,15 +87,18 @@ public class MySQLAdsDao implements Ads {
         try {
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
 
-            stmt.setLong(1,1);
+            stmt.setLong(1,ad.getUserId());
             stmt.setString(2,ad.getTitle());
             stmt.setString(3,ad.getDescription());
 
             stmt.executeUpdate();
-                ResultSet rs = stmt.getGeneratedKeys();
+
+            ResultSet rs = stmt.getGeneratedKeys();
 
             rs.next();
+
             return rs.getLong(1);
+
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new ad.", e);
         }
@@ -114,6 +116,7 @@ public class MySQLAdsDao implements Ads {
 //    }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
+        //takes values form result set.next() and constructs Ad objects
         return new Ad(
             rs.getLong("id"),
             rs.getLong("user_id"),
@@ -123,6 +126,7 @@ public class MySQLAdsDao implements Ads {
     }
 
     private List<Ad> createAdsFromResults(ResultSet rs) throws SQLException {
+        //loops through result set and fills up a list of Ad objects
         List<Ad> ads = new ArrayList<>();
         while (rs.next()) {
             ads.add(extractAd(rs));
