@@ -1,5 +1,6 @@
 package com.codeup.adlister.models;
 
+import com.codeup.adlister.util.Password;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.SQLException;
@@ -9,6 +10,7 @@ public class User {
     private String username;
     private String email;
     private String password;
+
 //---------- CREATES AN EMPTY USER ----------//
 
     public User() {}
@@ -17,9 +19,7 @@ public class User {
 //---------- CREATES A USER OBJECT WITH A USERNAME, EMAIL, AND PASSWORD ----------//
 
     /** USE THE SETPASSWORD METHOD
-     * When creating a User object replace the instance of the password (this.password) with setPassword method
-     * that takes in the password parameter. This is because the setPassword method already hashes the instance
-     * of password when the User class is created. ex( this.password = hashPassword(password) )
+     *
      * Using setPassword method reduces redundancy in code and automatically takes care of the hashing process.
      * When we use the getParameter method in MySQLUsersDao, we are using this constructor thereby retrieving a hashed
      * password and providing security on password credentials for our users preventing accidental data breaches.
@@ -30,7 +30,7 @@ public class User {
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
-        setPassword(password);
+        this.setPassword(password);
     }
 
 //---------- CREATES A USER WITH AN ID, USERNAME, EMAIL, AND PASSWORD ----------//
@@ -80,14 +80,14 @@ public class User {
 
     /** IN ORDER TO PROPERLY HASH THE PASSWORD YOU HAVE TO SET THE PASSWORD TO A USER OBJECT
      * 1)Use the setPassword method that takes a password string
-     * 2)Use the hashPassword function that takes the password parameter and assigns it to THIS instance of the password
+     * 2)Use the Password class' hash method that takes the password parameter and assigns it to THIS instance of the password
      */
 
     public void setPassword(String password) {
-        this.password = hashPassword(password);
+        this.password = Password.hash(password);
     }
 
-
+//this is already in the Password Class
 /**
  * 1)Create a method to hash passwords by taking a string variable and return a String variable of the hashed password
  * 2)Get the password for THIS instance of the User class and assign it to a String variable (userpassword) to hold the password
@@ -95,9 +95,9 @@ public class User {
  * 4)Assign the BCrypt.hashpw method to as String variable that will hold the hashed password and return that String variable
  */
 
-    public String hashPassword(String password) {
-        String userPassword = this.getPassword();
-        String hash = BCrypt.hashpw(userPassword, BCrypt.gensalt());
-        return hash;
-    }
+//    public String hashPassword(String password) {
+//        String userPassword = this.getPassword();
+//        String hash = BCrypt.hashpw(userPassword, BCrypt.gensalt());
+//        return hash;
+//    }
 }

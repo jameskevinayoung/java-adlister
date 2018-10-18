@@ -2,6 +2,8 @@ package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.User;
+import com.codeup.adlister.util.Password;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +32,15 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        boolean validAttempt = password.equals(user.getPassword());
+    //---------------- REFACTOR LOGIC TO CHECK PASSWORDS AGAINST USERS' HASHED PASSWORD ----------------\\
+
+        /**
+         * 1) create a boolean variable that is assigned the BCrypt.checkpw() method which is in the Password class
+         * 2) use the password variable entered in the login servlet as the first parameter
+         * 3) use the
+         */
+
+        boolean validAttempt = Password.check(password,user.getPassword());
 
         if (validAttempt) {
             request.getSession().setAttribute("user", user);
