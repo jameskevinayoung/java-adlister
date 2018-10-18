@@ -15,7 +15,7 @@ import java.io.IOException;
 public class CreateAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //changed
-        if(request.getSession().getAttribute()== null){
+        if(request.getSession().getAttribute("user")== null){
             response.sendRedirect("/login");
             return;
         }
@@ -24,7 +24,7 @@ public class CreateAdServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        User loggedUser = (User) request.getSession().getAttribute("user"), // changed
+        User loggedUser = (User) request.getSession().getAttribute("user"); // changed
         Ad ad = new Ad(
                 loggedUser.getId(), //changed
                 request.getParameter("title"),
