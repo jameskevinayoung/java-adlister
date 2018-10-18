@@ -29,14 +29,14 @@ public class MySQLUsersDao implements Users {
         String userQuery = "SELECT username FROM users WHERE username = ?";
 
         try {
-            PreparedStatement statement = connection.prepareStatement(userQuery, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = connection.prepareStatement(userQuery);
 
             statement.setString(1, username);
 
 
-            statement.execute();
+            ResultSet rs = statement.executeQuery();
 
-            ResultSet rs = statement.getGeneratedKeys();
+//            ResultSet rs = statement.getGeneratedKeys();
 
             rs.next();
 
@@ -44,6 +44,8 @@ public class MySQLUsersDao implements Users {
 
         } catch (SQLException e) {
             throw new RuntimeException("Error! ", e);
+        }catch(RuntimeException e){
+            throw new RuntimeException("Error: could not locate user", e);
         }
 
     }
