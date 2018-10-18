@@ -1,5 +1,9 @@
 package com.codeup.adlister.models;
 
+import org.mindrot.jbcrypt.BCrypt;
+
+import java.sql.SQLException;
+
 public class User {
     private long id;
     private String username;
@@ -11,14 +15,14 @@ public class User {
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
-        this.password = password;
+        setPassword(password);
     }
 
     public User(long id, String username, String email, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.password = password;
+        setPassword(password);
     }
 
     public long getId() {
@@ -48,8 +52,16 @@ public class User {
     public String getPassword() {
         return password;
     }
+//-----------------This is to hash a password and set it before reaching the MySQLDao------------//
+
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = hashPassword(password);
+    }
+
+    public String hashPassword(String password) {
+        String userPassword = this.getPassword();
+        String hash = BCrypt.hashpw(userPassword, BCrypt.gensalt());
+        return hash;
     }
 }
